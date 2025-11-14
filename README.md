@@ -1,0 +1,8 @@
+- our story
+- wedding day details
+- schedule of events
+- travel and accomodation
+- regirstry
+- rsvp form
+- faqs
+- things to do nearby
