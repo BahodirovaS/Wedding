@@ -3,11 +3,8 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <title>Sabina & Michael — Wedding</title>
-
-    <!-- Google Fonts -->
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?
         family=Pinyon+Script&
@@ -18,6 +15,8 @@
         display=swap" rel="stylesheet">
     <link href="https://api.fontshare.com/v2/css?f[]=boska@300,400,500,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./mobile.css" media="(max-width: 780px)">
+
 </head>
 
 <body>
@@ -25,11 +24,13 @@
 
 
     <main id="top">
-        <!-- ===== HERO (SVG oval window; photo inside) ===== -->
         <section class="hero" aria-label="Hero">
             <div class="hero-inner">
-                <img src="./assets/img/names4.png" alt="Sabina and Michael" class="hero-names" />
+                <img src="./assets/img/names4.png" alt="Sabina and Michael" class="hero-names hero-names-desktop" />
+                <img src="./assets/img/mobile-names.png" alt="Sabina and Michael"
+                    class="hero-names hero-names-mobile" />
             </div>
+
         </section>
 
         <header class="site-header">
@@ -37,6 +38,11 @@
                 <nav class="nav" aria-label="Primary">
                     <div class="brand-wrap">
                     </div>
+                    <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
                     <ul class="nav-links">
                         <li><a href="#details">Save the Date</a></li>
                         <li><a href="#welcome">Details</a></li>
@@ -53,8 +59,12 @@
         <section id="details" class="details-page" aria-labelledby="detailsTitle">
             <div class="details">
                 <div class="details-inner">
-                    <img src="./assets/img/save-date2.png" alt="Save the Date" class="save-date" />
+                    <img src="./assets/img/save-date2.png" alt="Save the Date" class="save-date save-date-desktop" />
+
+                    <img src="./assets/img/mobile-save-date.png" alt="Save the Date"
+                        class="save-date save-date-mobile" />
                 </div>
+
                 <div class="wedding-info">
                     <p class="wedding-date">04 . 26 . 2026</p>
                     <p class="wedding-location">
@@ -77,10 +87,6 @@
                     <div class="count-box">
                         <span class="num" id="cd-mins">—</span>
                         <span class="lbl">Minutes</span>
-                    </div>
-                    <div class="count-box">
-                        <span class="num" id="cd-secs">—</span>
-                        <span class="lbl">Seconds</span>
                     </div>
                 </div>
                 <p class="before-i-do">BEFORE WE DO</p>
@@ -284,6 +290,9 @@
                     </figure>
                 </div>
                 <img src="./assets/img/always.png" alt="Photo Gallery" class="gallery-title" id="galleryTitle" />
+                <button class="gallery-toggle" id="galleryToggle" type="button">
+                    View Gallery
+                </button>
             </div>
         </section>
         <section id="faq" class="faq" aria-labelledby="faqTitle">
@@ -302,7 +311,7 @@
                     <div class="faq-item">
                         <h3 class="faq-question">How do I get to the venue? Is there parking?</h3>
                         <p class="faq-answer">
-                            Transportation to the wedding venue will be provided. 
+                            Transportation to the wedding venue will be provided.
                             For those taking a taxi, there is onsite parking.
                         </p>
                     </div>
@@ -327,7 +336,7 @@
                         <h3 class="faq-question">When is the best time to book flights?</h3>
                         <p class="faq-answer">
                             From our research, book flights by Jan 26. fly out on a tuesday or wednesday.
-                            Verona does have a sizeable airport. 
+                            Verona does have a sizeable airport.
                         </p>
                     </div>
                     <div class="faq-item">
@@ -377,7 +386,6 @@
                 </div>
             </div>
         </section>
-
 
     </main>
     <script src="./script.js"></script>

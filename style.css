@@ -47,7 +47,8 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: color-mix(in srgb, var(--olive) 90%, white);
+    background-color: color-mix(in srgb, var(--olive) 90%, white);
+    border-bottom: none;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     transition: background-color 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
@@ -116,30 +117,8 @@ body {
     transform: translateY(-1px);
 }
 
-@media (max-width: 780px) {
-    .nav {
-        grid-template-columns: 1fr auto;
-        grid-template-areas:
-            "brand cta"
-            "links links";
-        row-gap: 8px;
-    }
-
-    .brand-wrap {
-        grid-area: brand;
-    }
-
-    .nav-cta {
-        grid-area: cta;
-    }
-
-    .nav-links {
-        grid-area: links;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        justify-content: flex-start;
-        padding-bottom: 6px;
-    }
+.nav-toggle {
+    display: none;
 }
 
 
@@ -221,6 +200,14 @@ html {
     animation-delay: 0.3s;
 }
 
+.hero-names-desktop {
+    display: block;
+}
+
+.hero-names-mobile {
+    display: none;
+}
+
 @keyframes fadeInNames {
     from {
         opacity: 0;
@@ -250,7 +237,6 @@ html {
 }
 
 
-/* Names */
 .names-wrap {
     text-align: center;
     margin-top: 0;
@@ -274,16 +260,6 @@ html {
 
 .spacer {
     height: 40px;
-}
-
-@media (max-width: 780px) {
-    .nav {
-        grid-template-columns: auto auto;
-    }
-
-    .names-wrap {
-        text-align: center;
-    }
 }
 
 .sr-only {
@@ -417,32 +393,14 @@ html {
     color: var(--rose);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .count-box {
-        transform: translateY(6px);
-        opacity: .98;
-        animation: cd-pop .6s ease both;
-    }
-
-    .count-box:nth-child(2) {
-        animation-delay: .06s;
-    }
-
-    .count-box:nth-child(3) {
-        animation-delay: .12s;
-    }
-
-    .count-box:nth-child(4) {
-        animation-delay: .18s;
-    }
-
-    @keyframes cd-pop {
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
+.save-date-desktop {
+    display: block;
 }
+
+.save-date-mobile {
+    display: none;
+}
+
 
 .before-i-do {
     text-align: center;
@@ -470,7 +428,7 @@ html {
     filter: drop-shadow(0 6px 18px rgba(0, 0, 0, .12));
 }
 
-/* ===== WEDDING DETAILS ===== */
+/* ===== WELCOME PAGE ===== */
 #welcome {
     position: relative;
     min-height: 100svh;
@@ -504,7 +462,6 @@ html {
     width: clamp(1500px, 10vw, 500px);
     height: auto;
     z-index: 3;
-    opacity: 0.9;
     pointer-events: none;
 }
 
@@ -516,18 +473,6 @@ html {
 .border-br {
     right: -500px;
     transform: none;
-}
-
-@media (max-width: 780px) {
-    #welcome {
-        padding-left: clamp(24px, 6vw, 40px);
-        padding-right: clamp(24px, 6vw, 40px);
-    }
-
-    .border {
-        width: clamp(40px, 8vw, 80px);
-        opacity: 0.7;
-    }
 }
 
 /* ===== Welcome Dinner Section ===== */
@@ -641,53 +586,6 @@ html {
     transform: rotate(-90deg);
 }
 
-
-@media (max-width: 850px) {
-    #welcome-dinner {
-        padding: clamp(40px, 10vw, 80px) clamp(24px, 6vw, 40px);
-    }
-
-    .welcome-dinner-container {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "title"
-            "photo"
-            "content";
-        text-align: center;
-        gap: clamp(24px, 6vw, 40px);
-    }
-
-    .welcome-dinner-title {
-        /* justify-content: center; */
-        max-width: 100%;
-    }
-
-    .welcome-dinner-content {
-        align-items: center;
-    }
-
-    .welcome-dinner-image img {
-        max-width: 80%;
-        height: auto;
-    }
-
-    .flower-corner {
-        width: clamp(100px, 25vw, 180px);
-        opacity: 0.75;
-    }
-
-    .flower-corner-br {
-        bottom: -20px;
-        right: -20px;
-    }
-
-    .flower-corner-tr {
-        top: -20px;
-        right: -20px;
-    }
-
-}
-
 /* ===== Timeline Section ===== */
 #timeline {
     position: relative;
@@ -772,21 +670,6 @@ html {
     max-width: 650px;
     margin-left: auto;
     margin-right: auto;
-}
-
-/* Mobile */
-@media (max-width: 780px) {
-    .itinerary {
-        padding: 0 10px;
-    }
-
-    .itinerary-item h3 {
-        font-size: clamp(18px, 2vw, 24px);
-    }
-
-    .itinerary-item p {
-        font-size: clamp(15px, 1.6vw, 18px);
-    }
 }
 
 /* ===== Where to Stay ===== */
@@ -908,39 +791,6 @@ html {
     color: var(--rose);
 }
 
-@media (max-width: 980px) {
-    .stay-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 640px) {
-    .stay-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .stay-figure img {
-        height: 240px;
-    }
-
-    .stay-corner {
-        width: clamp(80px, 18vw, 140px);
-        opacity: 0.85;
-    }
-
-    .stay-corner-tl {
-        top: -4px;
-        left: -4px;
-    }
-
-    .stay-corner-br {
-        right: -4px;
-        bottom: -4px;
-    }
-
-    /*stay corners can be removed for mobile*/
-}
-
 /* ===== OUR LOVE STORY ===== */
 #our-story {
     position: relative;
@@ -986,8 +836,6 @@ html {
     max-width: 1000px;
     margin: 0 auto clamp(80px, 8vw, 120px);
     height: 650px;
-    /* overflow-x: clip; */
-
 }
 
 .story-photo {
@@ -1067,25 +915,6 @@ html {
 }
 
 
-@media (max-width: 780px) {
-    .story-photos {
-        height: auto;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 16px;
-    }
-
-    .story-photo {
-        position: relative;
-        width: 140px;
-        height: 140px;
-        top: auto;
-        left: auto;
-        transform: none;
-    }
-}
-
 /* ===== GALLERY ===== */
 #gallery {
     position: relative;
@@ -1138,19 +967,9 @@ html {
     object-fit: cover;
 }
 
-/* Responsive */
-@media (max-width: 980px) {
-    .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.gallery-toggle {
+    display: none;
 }
-
-@media (max-width: 580px) {
-    .gallery-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
 
 /* ===== FAQ SECTION (Questions & Details) ===== */
 #faq {

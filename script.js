@@ -7,25 +7,23 @@
 (() => {
   const toggle = document.querySelector(".nav-toggle");
   const links = document.querySelector(".nav-links");
+
   if (!toggle || !links) return;
 
-  const setOpen = (open) => {
-    links.style.display = open ? "flex" : "none";
-    toggle.setAttribute("aria-expanded", String(open));
-  };
-  setOpen(false);
-
   toggle.addEventListener("click", () => {
-    const open = links.style.display === "flex";
-    setOpen(!open);
+    const isOpen = toggle.classList.toggle("open");
+    links.classList.toggle("open", isOpen);
+    toggle.setAttribute("aria-expanded", String(isOpen));
   });
 
   links.addEventListener("click", (e) => {
-    const a = e.target.closest("a");
-    if (!a) return;
-    setOpen(false);
+    if (!e.target.closest("a")) return;
+    toggle.classList.remove("open");
+    links.classList.remove("open");
+    toggle.setAttribute("aria-expanded", "false");
   });
 })();
+
 
 /* === Nav Links === */
 
@@ -100,11 +98,11 @@
   const dEl = document.getElementById('cd-days');
   const hEl = document.getElementById('cd-hours');
   const mEl = document.getElementById('cd-mins');
-  const sEl = document.getElementById('cd-secs');
-  if (!dEl || !hEl || !mEl || !sEl) return;
+
+  if (!dEl || !hEl || !mEl) return;
   
   const target = new Date(2026, 3, 26, 0, 0, 0);
-  
+
   function pad(n) { return n.toString().padStart(2, '0'); }
   
   function tick() {
@@ -115,7 +113,6 @@
       dEl.textContent = '00';
       hEl.textContent = '00';
       mEl.textContent = '00';
-      sEl.textContent = '00';
       const note = document.querySelector('.count-note');
       if (note) note.textContent = "It's today! 💍";
       clearInterval(timer);
@@ -126,17 +123,16 @@
     const days = Math.floor(sec / 86400);
     const hours = Math.floor((sec % 86400) / 3600);
     const mins = Math.floor((sec % 3600) / 60);
-    const secs = sec % 60;
-    
+
     dEl.textContent = String(days);
     hEl.textContent = pad(hours);
     mEl.textContent = pad(mins);
-    sEl.textContent = pad(secs);
   }
   
   tick();
-  const timer = setInterval(tick, 1000);
+  const timer = setInterval(tick, 30000);
 })();
+
 
 /* === Scroll color change === */
 
@@ -153,4 +149,18 @@
 
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
+})();
+
+/* === Gallery toggle for mobile === */
+
+(() => {
+  const btn = document.getElementById("galleryToggle");
+  const grid = document.querySelector("#gallery .gallery-grid");
+
+  if (!btn || !grid) return;
+
+  btn.addEventListener("click", () => {
+    const open = grid.classList.toggle("open");
+    btn.textContent = open ? "Hide Gallery" : "View Gallery";
+  });
 })();

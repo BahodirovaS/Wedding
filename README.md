@@ -6,3 +6,5 @@
 - rsvp form
 - faqs
 - things to do nearby
+
+- favicon
