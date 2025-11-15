@@ -156,11 +156,30 @@
 (() => {
   const btn = document.getElementById("galleryToggle");
   const grid = document.querySelector("#gallery .gallery-grid");
+  const section = document.getElementById("gallery");
 
-  if (!btn || !grid) return;
+  if (!btn || !grid || !section) return;
 
   btn.addEventListener("click", () => {
-    const open = grid.classList.toggle("open");
-    btn.textContent = open ? "Hide Gallery" : "View Gallery";
+    const isOpen = grid.classList.contains("open");
+
+    if (!isOpen) {
+      grid.classList.add("open");
+      btn.textContent = "Hide Gallery";
+    } else {
+      grid.classList.remove("open");
+      btn.textContent = "View Gallery";
+      if (location.hash !== "#gallery") {
+        location.hash = "#gallery";
+      } else {
+        const top =
+          section.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top, behavior: "smooth" });
+      }
+    }
   });
 })();
+
+window.addEventListener("load", () => {
+  history.replaceState(null, "", window.location.pathname);
+});

@@ -974,7 +974,7 @@ html {
 /* ===== FAQ SECTION (Questions & Details) ===== */
 #faq {
     position: relative;
-    background: var(--sage);
+    background: var(--olive);
     padding: clamp(80px, 10vw, 140px) clamp(20px, 5vw, 60px);
     color: var(--cream);
     text-align: center;
@@ -1055,24 +1055,6 @@ html {
     transform: none;
 }
 
-/* Small-screen tweaks */
-@media (max-width: 780px) {
-
-    #faq::before,
-    #faq::after {
-        width: clamp(110px, 26vw, 160px);
-        opacity: 0.7;
-    }
-
-    #faq::before {
-        left: -50px;
-    }
-
-    #faq::after {
-        right: -50px;
-    }
-}
-
 
 /* ===== RSVP SECTION ===== */
 
@@ -1080,7 +1062,6 @@ html {
     background: var(--cream);
     padding: clamp(80px, 10vw, 140px) 0;
     overflow-x: clip;
-
 }
 
 .rsvp-frame {
@@ -1155,6 +1136,10 @@ html {
     text-align: center;
 }
 
+.rsvp-title-mobile {
+    display: none;
+}
+
 .rsvp-title,
 .gift-title {
     font-family: var(--display-font);
@@ -1188,7 +1173,7 @@ html {
     letter-spacing: 1px;
     text-transform: uppercase;
     text-decoration: none;
-    font-size: 15px;
+    font-size: 18px;
     transition: transform 0.2s ease;
 }
 
@@ -1200,24 +1185,3 @@ html {
     margin-top: clamp(24px, 3vw, 34px);
 }
 
-@media (max-width: 640px) {
-    .rsvp-panel {
-        border-radius: 24px;
-        padding: 28px 20px 36px;
-    }
-
-    .rsvp-corner {
-        width: clamp(110px, 34vw, 170px);
-        opacity: 0.85;
-    }
-
-    .rsvp-corner-tl,
-    .rsvp-corner-tr {
-        top: -20px;
-    }
-
-    .rsvp-corner-bl,
-    .rsvp-corner-br {
-        bottom: -20px;
-    }
-}
