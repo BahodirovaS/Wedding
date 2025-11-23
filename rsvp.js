@@ -21,7 +21,7 @@ document.getElementById("search-btn").addEventListener("click", async () => {
     const res = await fetch(`${API_BASE}/find`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: input.value })
+        body: JSON.stringify({ name: input.value })
     });
 
     const data = await res.json();
