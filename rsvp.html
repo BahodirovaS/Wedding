@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>RSVP — Sabina & Michael</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Poiret+One&family=Julius+Sans+One&family=Josefin+Sans:wght@300;400&family=Forum&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=boska@300,400,500,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="rsvp.css">
+</head>
+
+<body>
+    <div class="rsvp-wrapper">
+
+        <img src="./assets/img/rsvp-title.png" class="rsvp-header">
+
+        <div id="step-search" class="step active">
+            <p class="subtitle">Enter your name to find your invitation</p>
+
+            <input type="text" id="search-input" placeholder="First or last name" class="input">
+            <button id="search-btn" class="btn">Search</button>
+
+            <p id="search-error" class="error"></p>
+        </div>
+
+        <div id="step-household" class="step">
+            <h2 class="subtitle">We found your household</h2>
+            <p id="household-name" class="household-name"></p>
+
+            <div id="guests-container"></div>
+
+            <div id="welcome-dinner-container"></div>
+
+            <button id="submit-btn" class="btn submit-btn">Submit RSVP</button>
+            <p id="submit-error" class="error"></p>
+        </div>
+
+        <div id="step-success" class="step">
+            <h2 class="success-title">Thank you!</h2>
+            <p class="success-text">Your RSVP has been received.</p>
+        </div>
+
+    </div>
+
+    <script src="rsvp.js"></script>
+</body>
+</html>
