@@ -40,40 +40,43 @@ document.getElementById("search-btn").addEventListener("click", async () => {
 
     data.guests.forEach(g => {
         guestsContainer.innerHTML += `
-            <div class="guest-block" data-guest="${g.id}" data-name="${g.name}">
-                <div class="guest-left">
-                    <div class="guest-first">${g.name.split(" ")[0]}</div>
-                    <div class="guest-last">${g.name.split(" ").slice(1).join(" ")}</div>
-                </div>
-
-                <div class="guest-right">
-                    <div class="sub-question">Will you attend the wedding?</div>
-                    <div class="choice-row attend-row">
-                        <button class="choice-btn" data-type="wedding" data-choice="yes">Yes</button>
-                        <button class="choice-btn" data-type="wedding" data-choice="no">No</button>
-                    </div>
-
-                    <div class="dinner-section hidden">
-                        <div class="sub-question">What would you like for dinner?</div>
-                        <div class="choice-row dinner-choice-row">
-                            <button class="choice-btn" data-type="dinner" data-choice="beef">Beef Cheek</button>
-                            <button class="choice-btn" data-type="dinner" data-choice="seabass">Sea Bass</button>
-                            <button class="choice-btn" data-type="dinner" data-choice="fowl">Guinea Fowl</button>
-                        </div>
-                    </div>
-
-                    <div class="sub-question welcome-sub">
-                        Will you attend the welcome dinner on April 25th, 2026?
-                    </div>
-                    <div class="choice-row welcome-row">
-                        <button class="choice-btn" data-type="welcome" data-choice="yes">Yes</button>
-                        <button class="choice-btn" data-type="welcome" data-choice="no">No</button>
-                    </div>
-                </div>
+        <div class="guest-block" data-guest="${g.id}" data-name="${g.name}">
+            
+            <div class="guest-left">
+                <div class="guest-first">${g.name.split(" ")[0]}</div>
+                <div class="guest-last">${g.name.split(" ").slice(1).join(" ")}</div>
             </div>
-        `;
-    });
 
+            <div class="guest-right">
+
+                <div class="sub-question">Will you attend the wedding?</div>
+                <div class="choice-row attend-row">
+                    <button class="choice-btn" data-type="wedding" data-choice="yes">Yes</button>
+                    <button class="choice-btn" data-type="wedding" data-choice="no">No</button>
+                </div>
+
+                <div class="dinner-section hidden">
+                    <div class="sub-question">What would you like for dinner?</div>
+                    <div class="choice-row dinner-choice-row">
+                        <button class="choice-btn" data-type="dinner" data-choice="beef">Beef Cheek</button>
+                        <button class="choice-btn" data-type="dinner" data-choice="seabass">Sea Bass</button>
+                        <button class="choice-btn" data-type="dinner" data-choice="fowl">Guinea Fowl</button>
+                    </div>
+                </div>
+
+                <div class="sub-question welcome-sub">
+                    Will you attend the welcome dinner on April 25th, 2026?
+                </div>
+                <div class="choice-row welcome-row">
+                    <button class="choice-btn" data-type="welcome" data-choice="yes">Yes</button>
+                    <button class="choice-btn" data-type="welcome" data-choice="no">No</button>
+                </div>
+
+            </div>
+
+        </div>
+    `;
+    });
 
 
     // Dinner question
@@ -119,7 +122,7 @@ document.getElementById("submit-btn").addEventListener("click", async () => {
 
     const responses = [];
 
-        document.querySelectorAll(".guest-block").forEach(block => {
+    document.querySelectorAll(".guest-block").forEach(block => {
         const guestId = block.dataset.guest;
         const name = block.dataset.name;
 
