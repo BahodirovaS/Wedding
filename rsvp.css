@@ -1,106 +1,96 @@
-body {
-    margin: 0;
-    padding: 0;
-    background: var(--cream, #fffdf6);
-    font-family: "Boska", serif;
-    color: #2a2a2a;
-}
 
-.rsvp-wrapper {
-    max-width: 680px;
-    margin: 40px auto;
-    text-align: center;
-    padding: 20px;
-}
-
-.rsvp-header {
-    width: 380px;
-    max-width: 90%;
-    margin-bottom: 20px;
-}
-
-.subtitle {
-    font-size: 24px;
-    margin-bottom: 16px;
-    font-weight: 500;
-}
-
-.input {
-    width: 100%;
-    padding: 14px;
-    font-size: 18px;
-    border: 2px solid #8c8a45;
-    border-radius: 6px;
-    margin-bottom: 12px;
-    font-family: inherit;
-}
-
-.btn {
-    padding: 12px 26px;
-    font-size: 18px;
-    background: #fffdf6;
-    border: 2px solid #8c8a45;
-    color: #423b1b;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.btn:hover {
-    transform: scale(1.03);
-}
-
-.error {
-    color: #b52a2a;
-    margin-top: 10px;
-    min-height: 24px;
-}
-
-.step {
-    display: none;
-}
-
-.step.active {
-    display: block;
-}
-
-.household-name {
-    font-size: 22px;
-    margin-bottom: 20px;
-}
-
-/* Guest buttons */
 .guest-block {
-    margin-bottom: 20px;
-    padding: 14px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    margin-bottom: 28px;
+    padding: 20px;
+    border: 1px solid rgba(140, 138, 69, 0.35);
+    border-radius: 10px;
+    background: #fffef8;
+    text-align: left;
 }
+
+
+.guest-name {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 14px;
+    color: #423b1b;
+}
+
+
+.sub-question {
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 12px;
+    margin-bottom: 8px;
+    color: #5d5630;
+}
+
 
 .choice-row {
     display: flex;
-    justify-content: center;
     gap: 12px;
-    margin-top: 10px;
+    margin-bottom: 4px;
 }
 
+
 .choice-btn {
-    padding: 8px 16px;
+    padding: 8px 20px;
     border: 2px solid #8c8a45;
     background: #fffdf6;
+    font-size: 16px;
     cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.choice-btn:hover {
+    transform: scale(1.05);
 }
 
 .choice-btn.selected-yes {
     background: #8c8a45;
+    border-color: #8c8a45;
     color: white;
 }
 
 .choice-btn.selected-no {
     background: #b52a2a;
+    border-color: #b52a2a;
     color: white;
 }
 
+
+.subtitle {
+    font-size: 26px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: #423b1b;
+}
+
+
+.household-name {
+    font-size: 20px;
+    color: #5d5630;
+    margin-bottom: 22px;
+}
+
+
+.submit-btn {
+    margin-top: 30px;
+    font-size: 20px;
+    padding: 14px 32px;
+    border-radius: 8px;
+}
+
+
 .success-title {
-    font-size: 32px;
+    font-size: 34px;
+    font-weight: 600;
     margin-bottom: 12px;
+    color: #423b1b;
+}
+
+.success-text {
+    font-size: 20px;
+    color: #5d5630;
 }

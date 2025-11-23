@@ -41,15 +41,24 @@ document.getElementById("search-btn").addEventListener("click", async () => {
 
     data.guests.forEach(g => {
         guestsContainer.innerHTML += `
-            <div class="guest-block" data-guest="${g.id}">
-                <div class="guest-name">${g.name}</div>
-                <div class="choice-row">
-                    <button class="choice-btn" data-choice="yes">Yes</button>
-                    <button class="choice-btn" data-choice="no">No</button>
-                </div>
+        <div class="guest-block" data-guest="${g.id}" data-name="${g.name}">
+            <div class="guest-name">${g.name}</div>
+
+            <div class="sub-question">Wedding Day?</div>
+            <div class="choice-row wedding-row">
+                <button class="choice-btn" data-type="wedding" data-choice="yes">Yes</button>
+                <button class="choice-btn" data-type="wedding" data-choice="no">No</button>
             </div>
-        `;
+
+            <div class="sub-question">Welcome Dinner?</div>
+            <div class="choice-row dinner-row">
+                <button class="choice-btn" data-type="dinner" data-choice="yes">Yes</button>
+                <button class="choice-btn" data-type="dinner" data-choice="no">No</button>
+            </div>
+        </div>
+    `;
     });
+
 
     // Dinner question
     document.getElementById("welcome-dinner-container").innerHTML = `
@@ -63,13 +72,21 @@ document.getElementById("search-btn").addEventListener("click", async () => {
     // Button selection logic
     document.querySelectorAll(".choice-btn").forEach(btn => {
         btn.addEventListener("click", () => {
-            const parent = btn.parentElement;
-            parent.querySelectorAll(".choice-btn").forEach(b => b.classList.remove("selected-yes", "selected-no"));
+            const parentRow = btn.parentElement;
 
-            if (btn.dataset.choice === "yes") btn.classList.add("selected-yes");
-            else btn.classList.add("selected-no");
+            // Clear previous selection in that row
+            parentRow.querySelectorAll(".choice-btn")
+                .forEach(b => b.classList.remove("selected-yes", "selected-no"));
+
+            // Apply new selection
+            if (btn.dataset.choice === "yes") {
+                btn.classList.add("selected-yes");
+            } else {
+                btn.classList.add("selected-no");
+            }
         });
     });
+
 
     // Move to step 2
     showStep("step-household");
@@ -84,17 +101,26 @@ document.getElementById("submit-btn").addEventListener("click", async () => {
     const household = window.currentHousehold;
     if (!household) return;
 
-    const guests = [];
+    const responses = [];
+
     document.querySelectorAll(".guest-block").forEach(block => {
         const guestId = block.dataset.guest;
-        const yes = block.querySelector('[data-choice="yes"]').classList.contains("selected-yes");
-        const no = block.querySelector('[data-choice="no"]').classList.contains("selected-no");
+        const name = block.dataset.name;
 
-        guests.push({
+        const weddingYes = block.querySelector('.wedding-row [data-choice="yes"]')?.classList.contains("selected-yes");
+        const weddingNo = block.querySelector('.wedding-row [data-choice="no"]')?.classList.contains("selected-no");
+
+        const dinnerYes = block.querySelector('.dinner-row [data-choice="yes"]')?.classList.contains("selected-yes");
+        const dinnerNo = block.querySelector('.dinner-row [data-choice="no"]')?.classList.contains("selected-no");
+
+        responses.push({
             id: guestId,
-            attending: yes ? true : no ? false : null
+            name,
+            wedding: weddingYes ? true : weddingNo ? false : null,
+            dinner: dinnerYes ? true : dinnerNo ? false : null
         });
     });
+
 
     const dinnerYes = document.getElementById("dinner-yes").classList.contains("selected-yes");
     const dinnerNo = document.getElementById("dinner-no").classList.contains("selected-no");
@@ -106,10 +132,10 @@ document.getElementById("submit-btn").addEventListener("click", async () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             householdId: household.id,
-            guests,
-            dinner
+            responses
         })
     });
+
 
     const data = await res.json();
 
