@@ -35,29 +35,45 @@ document.getElementById("search-btn").addEventListener("click", async () => {
 
     document.getElementById("household-name").textContent = data.id;
 
-    // Render guests
     const guestsContainer = document.getElementById("guests-container");
     guestsContainer.innerHTML = "";
 
     data.guests.forEach(g => {
         guestsContainer.innerHTML += `
-        <div class="guest-block" data-guest="${g.id}" data-name="${g.name}">
-            <div class="guest-name">${g.name}</div>
+            <div class="guest-block" data-guest="${g.id}" data-name="${g.name}">
+                <div class="guest-left">
+                    <div class="guest-first">${g.name.split(" ")[0]}</div>
+                    <div class="guest-last">${g.name.split(" ").slice(1).join(" ")}</div>
+                </div>
 
-            <div class="sub-question">Wedding Day?</div>
-            <div class="choice-row wedding-row">
-                <button class="choice-btn" data-type="wedding" data-choice="yes">Yes</button>
-                <button class="choice-btn" data-type="wedding" data-choice="no">No</button>
-            </div>
+                <div class="guest-right">
+                    <div class="sub-question">Will you attend the wedding?</div>
+                    <div class="choice-row attend-row">
+                        <button class="choice-btn" data-type="wedding" data-choice="yes">Yes</button>
+                        <button class="choice-btn" data-type="wedding" data-choice="no">No</button>
+                    </div>
 
-            <div class="sub-question">Welcome Dinner?</div>
-            <div class="choice-row dinner-row">
-                <button class="choice-btn" data-type="dinner" data-choice="yes">Yes</button>
-                <button class="choice-btn" data-type="dinner" data-choice="no">No</button>
+                    <div class="dinner-section hidden">
+                        <div class="sub-question">What would you like for dinner?</div>
+                        <div class="choice-row dinner-choice-row">
+                            <button class="choice-btn" data-type="dinner" data-choice="beef">Beef Cheek</button>
+                            <button class="choice-btn" data-type="dinner" data-choice="seabass">Sea Bass</button>
+                            <button class="choice-btn" data-type="dinner" data-choice="fowl">Guinea Fowl</button>
+                        </div>
+                    </div>
+
+                    <div class="sub-question welcome-sub">
+                        Will you attend the welcome dinner on April 25th, 2026?
+                    </div>
+                    <div class="choice-row welcome-row">
+                        <button class="choice-btn" data-type="welcome" data-choice="yes">Yes</button>
+                        <button class="choice-btn" data-type="welcome" data-choice="no">No</button>
+                    </div>
+                </div>
             </div>
-        </div>
-    `;
+        `;
     });
+
 
 
     // Dinner question
@@ -103,23 +119,36 @@ document.getElementById("submit-btn").addEventListener("click", async () => {
 
     const responses = [];
 
-    document.querySelectorAll(".guest-block").forEach(block => {
+        document.querySelectorAll(".guest-block").forEach(block => {
         const guestId = block.dataset.guest;
         const name = block.dataset.name;
 
-        const weddingYes = block.querySelector('.wedding-row [data-choice="yes"]')?.classList.contains("selected-yes");
-        const weddingNo = block.querySelector('.wedding-row [data-choice="no"]')?.classList.contains("selected-no");
+        const weddingYes = block
+            .querySelector('[data-type="wedding"][data-choice="yes"]')
+            ?.classList.contains("selected-yes");
+        const weddingNo = block
+            .querySelector('[data-type="wedding"][data-choice="no"]')
+            ?.classList.contains("selected-no");
 
-        const dinnerYes = block.querySelector('.dinner-row [data-choice="yes"]')?.classList.contains("selected-yes");
-        const dinnerNo = block.querySelector('.dinner-row [data-choice="no"]')?.classList.contains("selected-no");
+        const dinnerOption = block.querySelector(".dinner-choice-row .selected-option");
+        const dinner = dinnerOption ? dinnerOption.dataset.choice : null;
+
+        const welcomeYes = block
+            .querySelector('[data-type="welcome"][data-choice="yes"]')
+            ?.classList.contains("selected-yes");
+        const welcomeNo = block
+            .querySelector('[data-type="welcome"][data-choice="no"]')
+            ?.classList.contains("selected-no");
 
         responses.push({
             id: guestId,
             name,
             wedding: weddingYes ? true : weddingNo ? false : null,
-            dinner: dinnerYes ? true : dinnerNo ? false : null
+            dinner,                     // "beef" | "seabass" | "fowl" | null
+            welcomeDinner: welcomeYes ? true : welcomeNo ? false : null
         });
     });
+
 
 
     const dinnerYes = document.getElementById("dinner-yes").classList.contains("selected-yes");
