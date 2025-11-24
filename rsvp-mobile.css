@@ -134,3 +134,13 @@ body {
 .error {
     font-size: 15px;
 }
+
+.home-links {
+    margin-top: 24px;
+}
+
+.home-btn {
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+}
