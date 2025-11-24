@@ -393,10 +393,54 @@
     </main>
     <script src="./script.js"></script>
     <script>
-        window.addEventListener("load", () => {
-            document.getElementById("loader").classList.add("hidden");
+    document.addEventListener("DOMContentLoaded", () => {
+        const loader = document.getElementById("loader");
+        if (!loader) return;
+
+        const heroBgSrc = "./assets/img/hero2.jpg";
+        const desktopNameImg = document.querySelector(".hero-names-desktop");
+        const mobileNameImg = document.querySelector(".hero-names-mobile");
+
+        const waitForImage = (imgOrSrc) => {
+            return new Promise((resolve) => {
+                let img;
+
+                if (imgOrSrc instanceof HTMLImageElement) {
+                    if (imgOrSrc.complete) return resolve();
+                    imgOrSrc.onload = () => resolve();
+                    imgOrSrc.onerror = () => resolve();
+                    return;
+                }
+
+                img = new Image();
+                img.src = imgOrSrc;
+                if (img.complete) return resolve();
+                img.onload = () => resolve();
+                img.onerror = () => resolve();
+            });
+        };
+
+        const promises = [
+            waitForImage(heroBgSrc)
+        ];
+
+        if (desktopNameImg) promises.push(waitForImage(desktopNameImg));
+        if (mobileNameImg) promises.push(waitForImage(mobileNameImg));
+
+        const timeout = new Promise((resolve) => setTimeout(resolve, 4000));
+
+        Promise.race([
+            Promise.all(promises),
+            timeout
+        ]).then(() => {
+            loader.classList.add("hidden");
         });
-    </script>
+    });
+</script>
+
+<script src="./script.js"></script>
+</body>
+
 
 </body>
 
