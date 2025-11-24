@@ -127,6 +127,10 @@ document.getElementById("submit-btn").addEventListener("click", async () => {
     const household = window.currentHousehold;
 
     const email = document.getElementById("email-input").value.trim();
+    if (!email) {
+        error.textContent = "Please enter your email so we can send confirmation.";
+        return;
+    }
     const comments = document.getElementById("comments-input").value.trim();
     const responses = [];
 
