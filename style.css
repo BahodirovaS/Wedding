@@ -25,6 +25,7 @@
     box-sizing: border-box;
 }
 
+
 html,
 body {
     margin: 0;
@@ -1042,13 +1043,13 @@ html {
 }
 
 .faq-border-tl {
-    left: -750px;
+    left: -740px;
     top: 50px;
     transform: scaleX(-1);
 }
 
 .faq-border-br {
-    right: -750px;
+    right: -740px;
     top: 50px;
 
     transform: none;
@@ -1076,6 +1077,7 @@ html {
     height: auto;
     pointer-events: none;
     z-index: 1;
+    overflow: hidden;
 }
 
 .rsvp-corner-tl {
@@ -1103,7 +1105,7 @@ html {
 
 .rsvp-panel {
     position: relative;
-    background-image: url("./assets/img/garden-bckgd.png");
+    /* background-image: url("./assets/img/garden-bckgd.png"); */
     background-size: cover;
     background-position: center;
     overflow: hidden;
