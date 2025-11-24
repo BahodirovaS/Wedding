@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +8,9 @@
     <title>RSVP — Sabina & Michael</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Poiret+One&family=Julius+Sans+One&family=Josefin+Sans:wght@300;400&family=Forum&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Poiret+One&family=Julius+Sans+One&family=Josefin+Sans:wght@300;400&family=Forum&display=swap"
+        rel="stylesheet">
     <link href="https://api.fontshare.com/v2/css?f[]=boska@300,400,500,700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="rsvp.css">
@@ -18,24 +21,41 @@
 
         <img src="./assets/img/rsvp-title.png" class="rsvp-header">
 
+        <!-- STEP 1: Search -->
         <div id="step-search" class="step active">
-            <p class="subtitle">Enter your name to find your invitation</p>
+            <p class="subtitle">Enter the name on your invitation</p>
 
-            <input type="text" id="search-input" placeholder="First or last name" class="input">
-            <button id="search-btn" class="btn">Search</button>
+            <input type="text" id="search-input" placeholder="First and last name" class="input">
+            <button id="search-btn" class="btn">Find RSVP</button>
 
             <p id="search-error" class="error"></p>
         </div>
 
+        <!-- STEP 2: Guests -->
         <div id="step-household" class="step">
-            <h2 class="subtitle">We found your household</h2>
+
             <div id="guests-container"></div>
-            <div id="welcome-dinner-container"></div>
+
+            <div class="email-wrapper">
+                <label for="email-input" class="email-label">
+                    Email for confirmation (optional)
+                </label>
+                <input type="email" id="email-input" class="input" placeholder="you@example.com">
+            </div>
+
+            <div class="comments-wrapper">
+                <label for="comments-input" class="comments-label">
+                    Comments or questions (optional)
+                </label>
+                <textarea id="comments-input" class="input comments-input" rows="3"
+                    placeholder="Anything you'd like us to know?"></textarea>
+            </div>
 
             <button id="submit-btn" class="btn submit-btn">Submit RSVP</button>
             <p id="submit-error" class="error"></p>
         </div>
 
+        <!-- STEP 3: Success -->
         <div id="step-success" class="step">
             <h2 class="success-title">Thank you!</h2>
             <p class="success-text">Your RSVP has been received.</p>
@@ -45,4 +65,5 @@
 
     <script src="rsvp.js"></script>
 </body>
+
 </html>
