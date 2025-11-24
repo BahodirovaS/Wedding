@@ -21,6 +21,9 @@
 </head>
 
 <body>
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
     <main id="top">
         <section class="hero" aria-label="Hero">
             <div class="hero-inner">
@@ -389,6 +392,11 @@
 
     </main>
     <script src="./script.js"></script>
+    <script>
+        window.addEventListener("load", () => {
+            document.getElementById("loader").classList.add("hidden");
+        });
+    </script>
 
 </body>
 
