@@ -76,6 +76,16 @@ body {
 
 }
 
+.submit-btn {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.home-btn {
+    font-weight: 500;
+    font-size: 20px;
+}
+
 .error {
     color: #b52a2a;
     margin-top: 10px;
