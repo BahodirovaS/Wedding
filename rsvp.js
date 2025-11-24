@@ -1,17 +1,18 @@
 const API_BASE = "https://wedding-rsvp-backend-rho.vercel.app/api";
-const email = document.getElementById("email-input").value.trim();
 
 function showStep(id) {
     document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
     document.getElementById(id).classList.add("active");
 }
 
-/* ---------- SEARCH ---------- */
-
+/* ----------
+ * SEARCH
+ * ---------- */
 document.getElementById("search-btn").addEventListener("click", async () => {
     const input = document.getElementById("search-input");
     const error = document.getElementById("search-error");
     error.textContent = "";
+
     const raw = input.value.trim();
 
     if (!raw) {
@@ -23,6 +24,7 @@ document.getElementById("search-btn").addEventListener("click", async () => {
         error.textContent = "Please enter both first and last name.";
         return;
     }
+
     const res = await fetch(`${API_BASE}/find`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -30,7 +32,6 @@ document.getElementById("search-btn").addEventListener("click", async () => {
     });
 
     const data = await res.json();
-
     if (data.error) {
         error.textContent = data.error;
         return;
@@ -38,11 +39,12 @@ document.getElementById("search-btn").addEventListener("click", async () => {
 
     window.currentHousehold = data;
 
-    /* ----- Render guests ----- */
-
     const guestsContainer = document.getElementById("guests-container");
     guestsContainer.innerHTML = "";
 
+    /* ---------------------
+     * RENDER GUEST BLOCKS
+     * --------------------- */
     data.guests.forEach(g => {
         const first = g.name.split(" ")[0];
         const last = g.name.split(" ").slice(1).join(" ");
@@ -57,7 +59,7 @@ document.getElementById("search-btn").addEventListener("click", async () => {
 
                 <div class="guest-right">
 
-                <div class="sub-question">Will you attend the Welcome Dinner on April 25th, 2026?</div>
+                    <div class="sub-question">Will you attend the Welcome Dinner on April 25th?</div>
                     <div class="choice-row welcome-row">
                         <button class="choice-btn" data-type="welcome" data-choice="yes">Yes</button>
                         <button class="choice-btn" data-type="welcome" data-choice="no">No</button>
@@ -70,30 +72,27 @@ document.getElementById("search-btn").addEventListener("click", async () => {
                     </div>
 
                     <div class="dinner-section hidden">
-                        <div class="sub-question">What would you like for dinner?</div>
+                        <div class="sub-question">Dinner preference</div>
                         <div class="choice-row dinner-choice-row">
                             <button class="choice-btn" data-type="dinner" data-choice="beef">Beef Cheek</button>
                             <button class="choice-btn" data-type="dinner" data-choice="seabass">Sea Bass</button>
                             <button class="choice-btn" data-type="dinner" data-choice="fowl">Guinea Fowl</button>
-                            <button class="choice-btn" data-type="dinner" data-choice="parm">Eggplant Parmesean</button>
-
+                            <button class="choice-btn" data-type="dinner" data-choice="parm">Eggplant Parmesan</button>
                         </div>
 
-                        <div class="sub-question">Allergies or dietary preferences?</div>
-                        <textarea
-                            class="input allergy-input"
-                            rows="2"
-                            placeholder="e.g. no gluten, vegetarian, no shellfish"
-                        ></textarea>
+                        <div class="sub-question">Allergies or dietary needs?</div>
+                        <textarea class="input allergy-input" rows="2"
+                            placeholder="e.g. vegetarian, gluten-free"></textarea>
                     </div>
-
-                    
 
                 </div>
             </div>
         `;
     });
 
+    /* ------------------------
+     * BUTTON SELECT LOGIC
+     * ------------------------ */
     document.querySelectorAll(".choice-btn").forEach(btn => {
         btn.addEventListener("click", () => {
             const row = btn.parentElement;
@@ -110,16 +109,59 @@ document.getElementById("search-btn").addEventListener("click", async () => {
                 } else {
                     dinnerSec.classList.add("hidden");
                     dinnerSec.querySelectorAll(".choice-btn").forEach(b => b.classList.remove("selected"));
+                    block.querySelector(".allergy-input").value = "";
                 }
             }
         });
     });
 
+    /* --------------------------------------
+     * PREFILL EXISTING RESPONSES
+     * -------------------------------------- */
+    if (data.existingResponses) {
+        data.existingResponses.forEach(saved => {
+            const block = document.querySelector(`.guest-block[data-guest="${saved.id}"]`);
+            if (!block) return;
+
+            if (saved.welcome) {
+                const btn = block.querySelector(`.welcome-row [data-choice="${saved.welcome}"]`);
+                if (btn) btn.classList.add("selected");
+            }
+
+            if (saved.wedding) {
+                const btn = block.querySelector(`.wedding-row [data-choice="${saved.wedding}"]`);
+                if (btn) btn.classList.add("selected");
+
+                if (saved.wedding === "yes") {
+                    const dinnerSec = block.querySelector(".dinner-section");
+                    dinnerSec.classList.remove("hidden");
+                }
+            }
+
+            if (saved.dinner) {
+                const btn = block.querySelector(`.dinner-choice-row [data-choice="${saved.dinner}"]`);
+                if (btn) btn.classList.add("selected");
+            }
+
+            if (saved.allergies) {
+                block.querySelector(".allergy-input").value = saved.allergies;
+            }
+        });
+
+        if (data.existingEmail) {
+            document.getElementById("email-input").value = data.existingEmail;
+        }
+        if (data.existingComments) {
+            document.getElementById("comments-input").value = data.existingComments;
+        }
+    }
+
     showStep("step-household");
 });
 
-/* ---------- SUBMIT ---------- */
-
+/* ------------
+ * SUBMIT
+ * ----------- */
 document.getElementById("submit-btn").addEventListener("click", async () => {
     const error = document.getElementById("submit-error");
     error.textContent = "";
@@ -131,7 +173,9 @@ document.getElementById("submit-btn").addEventListener("click", async () => {
         error.textContent = "Please enter your email so we can send confirmation.";
         return;
     }
+
     const comments = document.getElementById("comments-input").value.trim();
+
     const responses = [];
 
     document.querySelectorAll(".guest-block").forEach(block => {
@@ -153,15 +197,14 @@ document.getElementById("submit-btn").addEventListener("click", async () => {
         });
     });
 
-
     const res = await fetch(`${API_BASE}/submit`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             householdId: household.id,
             responses,
-            email: email || null,
-            comments: comments || ""
+            email,
+            comments
         })
     });
 
@@ -174,4 +217,3 @@ document.getElementById("submit-btn").addEventListener("click", async () => {
 
     showStep("step-success");
 });
-
