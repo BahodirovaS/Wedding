@@ -12,16 +12,21 @@ document.getElementById("search-btn").addEventListener("click", async () => {
     const input = document.getElementById("search-input");
     const error = document.getElementById("search-error");
     error.textContent = "";
+    const raw = input.value.trim();
 
-    if (!input.value.trim()) {
+    if (!raw) {
         error.textContent = "Please enter a name.";
         return;
     }
-
+    const parts = raw.split(/\s+/);
+    if (parts.length < 2) {
+        error.textContent = "Please enter both first and last name.";
+        return;
+    }
     const res = await fetch(`${API_BASE}/find`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: input.value })
+        body: JSON.stringify({ name: raw })
     });
 
     const data = await res.json();
