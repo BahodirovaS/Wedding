@@ -3,15 +3,19 @@
 body {
     max-width: 100vw;
     overflow-x: hidden;
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
 }
 
-html, body {
+html,
+body {
     height: 100%;
     overflow-y: auto;
     overscroll-behavior: none;
-    background-color: color-mix(in srgb, var(--olive) 68%, transparent);
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    padding-top: env(safe-area-inset-top);
 }
 
 
@@ -32,12 +36,14 @@ html, body {
 .hero {
     position: relative;
     z-index: 0;
-    min-height: 105dvh;
+    min-height: 100vh;
+    height: 100vh;
     background-attachment: scroll;
     background-size: cover;
     background-position: center;
     overflow-x: hidden;
-}
+    padding-top: 0;
+    padding-bottom: 0;}
 
 .hero-inner {
     position: absolute;
@@ -442,7 +448,7 @@ html, body {
     width: auto !important;
     height: auto !important;
     transform: none !important;
-    margin: 0 ;
+    margin: 0;
     padding: 0;
     outline: 1px solid var(--cream);
     outline-offset: -5px;
@@ -499,7 +505,7 @@ html, body {
 
 #gallery {
     padding: 50px 20px;
-      overflow: visible;
+    overflow: visible;
 
 }
 
@@ -516,20 +522,21 @@ html, body {
     border: 2px solid var(--rose);
     background: var(--rose);
     font-family: var(--display-font);
-    font-size:20px;
+    font-size: 20px;
     font-weight: 500;
     letter-spacing: 1px;
     text-transform: uppercase;
     color: var(--cream);
 }
+
 .gallery-grid {
-  display: none;
-  flex-direction: column;
-  gap: 18px;
+    display: none;
+    flex-direction: column;
+    gap: 18px;
 }
 
 .gallery-grid.open {
-  display: flex;
+    display: flex;
 }
 
 .gallery-item {
@@ -579,4 +586,3 @@ html, body {
     margin: 0 auto 12px auto !important;
     height: auto !important;
 }
-

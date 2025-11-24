@@ -32,7 +32,7 @@
 #loader {
     position: fixed;
     inset: 0;
-    background: var(--cream);
+    background: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,7 +59,6 @@
 }
 
 
-
 html,
 body {
     margin: 0;
@@ -68,7 +67,6 @@ body {
 }
 
 body {
-    /* font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; */
     color: var(--text);
     background-color: var(--olive);
     background-position: center;
@@ -1069,7 +1067,7 @@ html {
 
 .faq-border {
     position: absolute;
-    width: clamp(1300px, 10vw, 500px);
+    width: clamp(1600px, 10vw, 500px);
     height: auto;
     z-index: 3;
     opacity: 0.9;
@@ -1077,14 +1075,14 @@ html {
 }
 
 .faq-border-tl {
-    left: -740px;
-    top: 50px;
+    left: -850px;
+    top: 75px;
     transform: scaleX(-1);
 }
 
 .faq-border-br {
-    right: -740px;
-    top: 50px;
+    right: -850px;
+    top: 75px;
 
     transform: none;
 }

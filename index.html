@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Sabina & Michael — Wedding</title>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?
@@ -21,6 +21,7 @@
 </head>
 
 <body>
+
     <div id="loader">
         <div class="spinner"></div>
     </div>
@@ -245,14 +246,7 @@
                 </div>
 
                 <div class="story-text">
-                    <p>Our story began in the most unexpected way — Michael gave sabina a special kiss and she fell in
-                        love.
-                        She smiled and he fell in love.</p>
-
-                    <p>Sabina and Michael sitting in a tree. K I S S I N G. now they're getting married! Hehe</p>
-
-                    <p>Now, they're living together and always kissing and hugging and hugging and kissing.
-                        Don't forget snuggling!!</p>
+                    <p>Story coming soon!</p>
                 </div>
             </div>
             <img src="./assets/img/flower-corner-blush.png" alt="" class="flower-corner-blush flower-corner-blush-bl" />
@@ -308,6 +302,12 @@
                         <p class="faq-answer">
                             Cocktail attire for the rehearsal dinner, formal (black time optional) attire.
                         </p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Can we bring our children?</h3>
+                        <p class="faq-answer">
+                            Due to venue capacity, we can only host the guests listed on each invitation. Thank you for
+                            your understanding. </p>
                     </div>
                     <div class="faq-item">
                         <h3 class="faq-question">How do I get to the venue? Is there parking?</h3>
@@ -393,52 +393,52 @@
     </main>
     <script src="./script.js"></script>
     <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const loader = document.getElementById("loader");
-        if (!loader) return;
+        document.addEventListener("DOMContentLoaded", () => {
+            const loader = document.getElementById("loader");
+            if (!loader) return;
 
-        const heroBgSrc = "./assets/img/hero2.jpg";
-        const desktopNameImg = document.querySelector(".hero-names-desktop");
-        const mobileNameImg = document.querySelector(".hero-names-mobile");
+            const heroBgSrc = "./assets/img/hero2.jpg";
+            const desktopNameImg = document.querySelector(".hero-names-desktop");
+            const mobileNameImg = document.querySelector(".hero-names-mobile");
 
-        const waitForImage = (imgOrSrc) => {
-            return new Promise((resolve) => {
-                let img;
+            const waitForImage = (imgOrSrc) => {
+                return new Promise((resolve) => {
+                    let img;
 
-                if (imgOrSrc instanceof HTMLImageElement) {
-                    if (imgOrSrc.complete) return resolve();
-                    imgOrSrc.onload = () => resolve();
-                    imgOrSrc.onerror = () => resolve();
-                    return;
-                }
+                    if (imgOrSrc instanceof HTMLImageElement) {
+                        if (imgOrSrc.complete) return resolve();
+                        imgOrSrc.onload = () => resolve();
+                        imgOrSrc.onerror = () => resolve();
+                        return;
+                    }
 
-                img = new Image();
-                img.src = imgOrSrc;
-                if (img.complete) return resolve();
-                img.onload = () => resolve();
-                img.onerror = () => resolve();
+                    img = new Image();
+                    img.src = imgOrSrc;
+                    if (img.complete) return resolve();
+                    img.onload = () => resolve();
+                    img.onerror = () => resolve();
+                });
+            };
+
+            const promises = [
+                waitForImage(heroBgSrc)
+            ];
+
+            if (desktopNameImg) promises.push(waitForImage(desktopNameImg));
+            if (mobileNameImg) promises.push(waitForImage(mobileNameImg));
+
+            const timeout = new Promise((resolve) => setTimeout(resolve, 4000));
+
+            Promise.race([
+                Promise.all(promises),
+                timeout
+            ]).then(() => {
+                loader.classList.add("hidden");
             });
-        };
-
-        const promises = [
-            waitForImage(heroBgSrc)
-        ];
-
-        if (desktopNameImg) promises.push(waitForImage(desktopNameImg));
-        if (mobileNameImg) promises.push(waitForImage(mobileNameImg));
-
-        const timeout = new Promise((resolve) => setTimeout(resolve, 4000));
-
-        Promise.race([
-            Promise.all(promises),
-            timeout
-        ]).then(() => {
-            loader.classList.add("hidden");
         });
-    });
-</script>
+    </script>
 
-<script src="./script.js"></script>
+    <script src="./script.js"></script>
 </body>
 
 

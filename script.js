@@ -1,3 +1,20 @@
+// iOS 26 Safari Liquid Glass fix - Set hero height to window.outerHeight
+(() => {
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+  
+  function setHeroHeight() {
+    if (window.outerHeight) {
+      hero.style.height = `${window.outerHeight}px`;
+      hero.style.minHeight = `${window.outerHeight}px`;
+    }
+  }
+  
+  setHeroHeight();
+  window.addEventListener('resize', setHeroHeight);
+  window.addEventListener('orientationchange', setHeroHeight);
+})();
+
 (() => {
   const yearEls = document.querySelectorAll("#year");
   const y = String(new Date().getFullYear());
