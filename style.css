@@ -508,7 +508,7 @@ html {
 
 .welcome-dinner-image img {
     width: 100%;
-    max-width: 550px;
+    max-width: 450px;
     height: 700px;
     border: 5px solid var(--olive);
     padding: 3px;
