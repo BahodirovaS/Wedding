@@ -50,7 +50,9 @@
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 #loader.hidden {
@@ -1006,7 +1008,17 @@ html {
 /* ===== FAQ SECTION (Questions & Details) ===== */
 #faq {
     position: relative;
-    background: var(--olive);
+    --tile: 250px;
+
+    background:
+        conic-gradient(
+            from 45deg,
+            var(--olive) 0 25%,
+            var(--sage) 0 50%,
+            var(--olive) 0 75%,
+            var(--sage) 0 100%
+        )
+        0 0 / var(--tile) var(--tile);
     padding: clamp(80px, 10vw, 140px) clamp(20px, 5vw, 60px);
     color: var(--cream);
     text-align: center;
@@ -1021,6 +1033,19 @@ html {
     z-index: 1;
     max-width: 900px;
     margin: 0 auto;
+    background: var(--cream);
+    padding: clamp(40px, 5vw, 70px);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.18);
+}
+
+.faq-inner::before {
+    content: "";
+    position: absolute;
+    inset:20px; /* distance from the edges = border appears inside */
+    border: 2px solid var(--olive);
+    border-radius: inherit; /* keeps the rounded shape consistent */
+    pointer-events: none;
+    z-index: 2;
 }
 
 .faq-title {
@@ -1028,9 +1053,9 @@ html {
     font-size: clamp(32px, 4vw, 44px);
     letter-spacing: 3px;
     text-transform: uppercase;
-    margin: 0 0 clamp(32px, 4vw, 48px);
-    margin-top: -10vh;
-    color: var(--cream);
+    margin: clamp(32px, 4vw, 48px);
+    margin-top: 0vh;
+    color: var(--claret);
 }
 
 .faq-list {
@@ -1053,7 +1078,7 @@ html {
     letter-spacing: 1px;
     text-transform: uppercase;
     margin: 0 0 6px;
-    color: var(--cream);
+    color: var(--claret);
 }
 
 .faq-answer {
@@ -1061,7 +1086,7 @@ html {
     font-size: clamp(20px, 1.6vw, 25px);
     line-height: 1.7;
     margin: 0;
-    color: #fdfaf3;
+    color: var(--claret);
     opacity: 0.96;
 }
 
@@ -1217,4 +1242,3 @@ html {
 .gift-corner {
     margin-top: clamp(24px, 3vw, 34px);
 }
-
