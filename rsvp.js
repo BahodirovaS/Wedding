@@ -74,10 +74,9 @@ document.getElementById("search-btn").addEventListener("click", async () => {
                     <div class="dinner-section hidden">
                         <div class="sub-question">Dinner preference</div>
                         <div class="choice-row dinner-choice-row">
-                            <button class="choice-btn" data-type="dinner" data-choice="beef">Beef Cheek</button>
+                            <button class="choice-btn" data-type="dinner" data-choice="beef">Beef Fillet</button>
                             <button class="choice-btn" data-type="dinner" data-choice="seabass">Sea Bass</button>
-                            <button class="choice-btn" data-type="dinner" data-choice="fowl">Guinea Fowl</button>
-                            <button class="choice-btn" data-type="dinner" data-choice="parm">Eggplant Parmesan</button>
+                            <button class="choice-btn" data-type="dinner" data-choice="vegetarian">Vegetarian</button>
                         </div>
 
                         <div class="sub-question">Allergies or dietary needs?</div>
