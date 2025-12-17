@@ -652,7 +652,7 @@ html {
     height: auto;
     object-fit: contain;
     transform: translateX(0);
-    margin-bottom: clamp(60px, 10vw, 100px);
+    margin-bottom: clamp(60px, 10vw, 10px);
 }
 
 .itinerary {
@@ -663,6 +663,18 @@ html {
     gap: clamp(24px, 5vw, 44px);
     text-align: center;
 }
+
+.timeline-date {
+    font-family: var(--display-font);
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0px;
+    color: var(--rose);
+    text-align: center;
+}
+
 
 .itinerary-item {
     padding-bottom: 20px;
